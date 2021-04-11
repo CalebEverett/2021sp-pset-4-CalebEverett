@@ -12,6 +12,7 @@ pre-commit = "*"
 pynacl = "*"
 pytest = "*"
 pytest-cov = "*"
+moto = "*"
 
 [packages]
 boto3 = "*"
