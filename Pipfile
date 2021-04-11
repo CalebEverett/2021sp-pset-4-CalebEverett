@@ -12,11 +12,12 @@ pre-commit = "*"
 pynacl = "*"
 pytest = "*"
 pytest-cov = "*"
+moto = "*"
 
 [packages]
 boto3 = "*"
 canvasapi = "*"
-csci-utils = {editable = true, , extras = ["all"], git = "https://${ACCESS_TOKEN}:x-oauth-basic@github.com/csci-e-29/2021sp-csci-utils-CalebEverett@master}
+csci-utils = {editable = true, extras = ["all"], git = "https://${ACCESS_TOKEN}:x-oauth-basic@github.com/csci-e-29/2021sp-csci-utils-CalebEverett@master"}
 luigi = "*"
 mlflow = "*"
 torch = "*"

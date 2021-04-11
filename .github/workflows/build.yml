@@ -11,6 +11,7 @@ env:
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  BUCKET: caleb-cscie29
   CANVAS_TOKEN: ${{ secrets.CANVAS_TOKEN }}
   CANVAS_URL: ${{ secrets.CANVAS_URL }}
   CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -47,5 +48,4 @@ jobs:
     - name: Submit to Canvas
       if: false # Set this to true to submit
       run: |
-        pipenv run python submit.py        
-
+        pipenv run python submit.py
