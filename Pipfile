@@ -6,20 +6,21 @@ verify_ssl = true
 [dev-packages]
 black = "*"
 flake8 = "*"
-pre-commit = "*"
-pytest = "*"
-pytest-cov = "*"
-pynacl = "*"
 gitpython = "*"
 ipykernel = "*"
+pre-commit = "*"
+pynacl = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [packages]
+boto3 = "*"
 canvasapi = "*"
-csci-utils = {editable = true, git = "https://${ACCESS_TOKEN}:x-oauth-basic@github.com/csci-e-29/2021sp-csci-utils-CalebEverett@master"}
+csci-utils = {editable = true, , extras = ["all"], git = "https://${ACCESS_TOKEN}:x-oauth-basic@github.com/csci-e-29/2021sp-csci-utils-CalebEverett@master}
 luigi = "*"
+mlflow = "*"
 torch = "*"
 torchvision = "*"
-boto3 = "*"
 
 [requires]
 python_version = "3.8"
