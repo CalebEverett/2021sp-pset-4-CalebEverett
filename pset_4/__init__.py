@@ -35,9 +35,9 @@ class Stylize(ExternalProgramTask):
             "neural_style",
             "eval",
             "--content-image",
-            self.temp_image_path,
+            self.local_image_path,
             "--model",
-            self.temp_model_path,
+            self.local_model_path,
             "--output-image",
             self.temp_output_path,
             "--cuda",
@@ -45,14 +45,8 @@ class Stylize(ExternalProgramTask):
         ]
 
     def run(self):
-        with self.output().open("w") as tmpoutput:
-            self.temp_output_path = tmpoutput.name
-            with self.input()["image"].open() as tmpimage:
-                self.temp_image_path = tmpimage.name
-                with self.input()["model"].open() as tmpmodel:
-                    self.temp_model_path = tmpmodel.name
-
-                    super().run()
+        with self.output().temporary_path() as self.temp_output_path:
+            super().run()
 
     def output(self):
         return SuffixPreservingLocalTarget(

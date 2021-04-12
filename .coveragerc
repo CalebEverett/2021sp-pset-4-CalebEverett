@@ -9,6 +9,9 @@ parallel = true
 [report]
 show_missing = true
 precision = 2
+omit =
+    pset_4/cli.py
+    pset_4/__main__.py
 exclude_lines =
     # Have to re-enable the standard pragma
     pragma: no cover
