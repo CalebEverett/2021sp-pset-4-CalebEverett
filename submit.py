@@ -90,5 +90,7 @@ if __name__ == "__main__":
     assert result.status == SUCCESS
     file_id = sm.upload_quiz_file(stylize_kwargs["local_output_path"])
 
-    sm.atomic_quiz_submit(partial(answers_fn, file_id=file_id), verbose=True)
-    sm.assignment_submit(verbose=True, late_days=1)
+    sm.atomic_quiz_submit(
+        partial(answers_fn, file_id=file_id), verbose=True, late_submission=True
+    )
+    sm.assignment_submit(verbose=True, late_days=1, late_submission=True)

@@ -77,9 +77,5 @@ docs/_build
 src/*/_version.py
 
 # Other custom exclusions
-pset_4/data
-download_saved_models.py
-saved_models
-images
 scratch.ipynb
 junk.py
