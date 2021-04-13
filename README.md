@@ -23,16 +23,11 @@
 
 This assignment was about about developing robust data processing pipelines with [Luigi](https://luigi.readthedocs.io/en/stable/) and machine learning operations. The end product is a pipeline that downloads an image from [S3](https://docs.aws.amazon.com/s3/index.html) and conducts neural style transfer on it using [pre-trained deep learning models](https://github.com/abhiskk/fast-neural-style).
 
-<div>
-  <p align="center">
-    <img src="pset_4/images/luigi.jpg" align="left"><img width=300 src="pset_4/images/cat.jpg">
-  </p>
-</div>
-<div>
-  <p align="center">
-    <img src="pset_4/images/luigi_mosaic.jpg" align="left"><img width=300 src="pset_4/images/cat_mosaic.jpg">
-  </p>
-</div>
+<table>
+    <tr><td><img src="pset_4/images/luigi.jpg" align="left"></td><td><img width=300 src="pset_4/images/cat.jpg"></td></tr>
+    <tr><td><img src="pset_4/images/luigi_mosaic.jpg" align="left"></td><td><img width=300 src="pset_4/images/cat_mosaic.jpg"></td></tr>
+</table>
+
 
 ## New Atomic Write
 The first problem of this assignment was the development of a new atomic write function. This function was written as a Luigi Task to be able to write atomically to an intermediate temporary file with the same extension as the target file. This solution is implemented in [csci_utils package](https://github.com/csci-e-29/2021sp-csci-utils-CalebEverett/blob/ca4cd04ec0f7bc73735c89618c0932da2dbe640b/src/csci_utils/luigi/__init__.py#L45) to be able to use it in other problem sets.
