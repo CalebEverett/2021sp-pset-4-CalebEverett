@@ -25,7 +25,7 @@ class Stylize(Task):
     local_output_path = Parameter(description="Path to write stylized image to.")
     style_model = Parameter(description="Model to use for stylizing.")
     content_scale = FloatParameter(
-        description="Scaling factor to apply to original image.", default=1.0
+        description="Scaling factor to apply to original image.", default=None
     )
     docker_tag = Parameter(
         default="new-style", description="Tag to apply to Docker image."
@@ -53,16 +53,22 @@ class Stylize(Task):
 
         logger.info("Styling image.")
         with self.output().temporary_path() as self.temp_output_path:
+
+            command = [
+                "--content_image",
+                f"data/{self.local_image_path}",
+                "--output_image",
+                f"data/{self.temp_output_path}",
+                "--style_model",
+                f"models/{self.style_model}",
+            ]
+
+            if self.content_scale is not None:
+                command.extend(["--content_scale", self.content_scale])
+
             client.containers.run(
                 self.docker_tag,
-                command=[
-                    "--content_image",
-                    f"data/{self.local_image_path}",
-                    "--output_image",
-                    f"data/{self.temp_output_path}",
-                    "--style_model",
-                    f"models/{self.style_model}",
-                ],
+                command=command,
                 volumes={self.bind_mount: {"bind": "/data", "mode": "rw"}},
             )
 
