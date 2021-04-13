@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e76aab4021a619b6fad4ba97696e8609f37e3a45b5affea782219268f8cb0a15"
+            "sha256": "b34fa04900faefa807d301b4ce53932706f69aa2533be7ec8a6b2057f9570b32"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -68,7 +68,7 @@
                 "all"
             ],
             "git": "https://${ACCESS_TOKEN}:x-oauth-basic@github.com/csci-e-29/2021sp-csci-utils-CalebEverett",
-            "ref": "ca4cd04ec0f7bc73735c89618c0932da2dbe640b"
+            "ref": "707c2123506eb9a49e656b6bf52630dc2ffc161c"
         },
         "docker": {
             "hashes": [
