@@ -5,7 +5,7 @@ name: build status
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, dev, debug/gha_tests ]
 
 env:
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -46,6 +46,6 @@ jobs:
       run: |
         pipenv run python -m pset_4
     - name: Submit to Canvas
-      if: true # Set this to true to submit
+      if: false # Set this to true to submit
       run: |
         pipenv run python submit.py

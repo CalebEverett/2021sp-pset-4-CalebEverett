@@ -5,22 +5,11 @@ import hashlib
 from pathlib import Path
 from unittest import TestCase
 
-import boto3
 from luigi import build, execution_summary
 
 from pset_4 import Stylize
 
-AWS_ACCESS_KEY = "XXXXXXXXXXXXXXXXXXXX"
-AWS_SECRET_KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-AWS_SESSION_TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 SUCCESS = execution_summary.LuigiStatusCode.SUCCESS
-
-
-def create_bucket():
-    conn = boto3.resource("s3", region_name="us-east-1")
-    # We need to create the bucket since this is all in Moto's 'virtual' AWS account
-    conn.create_bucket(Bucket="mybucket")
-    return conn
 
 
 class StylizeTests(TestCase):
@@ -50,6 +39,7 @@ class StylizeTests(TestCase):
         # Check to make sure neuralstyle produced the correct output
         with open(self.stylize_args["local_output_path"], "rb") as f:
             hash = hashlib.md5(f.read()).hexdigest()
+            print(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
             self.assertEqual(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
 
         # Cleanup
