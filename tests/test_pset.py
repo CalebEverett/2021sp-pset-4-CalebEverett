@@ -41,13 +41,15 @@ class StylizeTests(TestCase):
         # Check to make sure neuralstyle produced the correct output
         with open(self.stylize_args["local_output_path"], "rb") as f:
             hash = hashlib.md5(f.read()).hexdigest()
-            print(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
-            self.assertEqual(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
+            self.assertIn(
+                hash,
+                (
+                    "bba7bfe92f1c89d1ef6b28aaf97b6b2b",
+                    "676f6102e406ca5625748b62d394b82c",
+                ),
+            )
 
-        # Cleanup
-        for p in Path("temp").iterdir():
-            p.unlink()
-        Path("temp").rmdir()
+        shutil.rmtree(Path("temp"))
 
 
 class PackageModelTests(TestCase):
@@ -69,7 +71,12 @@ class PackageModelTests(TestCase):
         with open(args.output_image, "rb") as f:
             hash = hashlib.md5(f.read()).hexdigest()
             print(hash)
-            self.assertEqual(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
-
+            self.assertIn(
+                hash,
+                (
+                    "bba7bfe92f1c89d1ef6b28aaf97b6b2b",
+                    "676f6102e406ca5625748b62d394b82c",
+                ),
+            )
         # Cleanup
         shutil.rmtree(Path("temp"))
