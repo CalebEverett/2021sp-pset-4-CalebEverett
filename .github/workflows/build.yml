@@ -5,7 +5,7 @@ name: build status
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, dev, debug/gha_tests ]
 
 env:
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -42,10 +42,8 @@ jobs:
     - name: Report coverage to codeclimate
       run: |
         ./cc-test-reporter after-build --exit-code 0
-    - name: Run pset_4
-      run: |
-        pipenv run python -m pset_4
     - name: Submit to Canvas
-      if: true # Set this to true to submit
+      if: true
       run: |
         pipenv run python submit.py
+  #

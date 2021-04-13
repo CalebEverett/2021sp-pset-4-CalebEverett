@@ -1,29 +1,29 @@
 import os
 from functools import partial
-from pathlib import Path
 from typing import Dict, List
 
 from canvasapi.quiz import QuizSubmissionQuestion
 from csci_utils.canvas_utils import SubmissionManager
 from git import Repo
-from luigi import build
+from luigi import build, execution_summary
 
 from pset_4 import Stylize
 
 REPO = Repo(".")
 CANVAS_URL = os.getenv("CANVAS_URL")
 CANVAS_TOKEN = os.getenv("CANVAS_TOKEN")
+SUCCESS = execution_summary.LuigiStatusCode.SUCCESS
 
 stylize_kwargs = dict(
     bucket=os.getenv("BUCKET"),
     s3_image_path="pset_4/images/cat.jpg",
-    local_image_path="temp/cat.jpg",
-    s3_model_path="pset_4/saved_models/mosaic.pth",
-    local_model_path="temp/mosaic.pth",
-    local_output_path="temp/cat_mosaic.jpg",
+    local_image_path="pset_4/images/cat.jpg",
+    local_output_path="pset_4/images/cat_mosaic.jpg",
+    style_model="mosaic",
+    docker_tag="new-style",
 )
 
-stylize_status = build([Stylize(**stylize_kwargs)], local_scheduler=True)
+result = build([Stylize(**stylize_kwargs)], local_scheduler=True, detailed_summary=True)
 
 # Question 1 - <p id="style">Upload a stylized image of your choice!</p>
 # {'answer': None,
@@ -87,15 +87,8 @@ if __name__ == "__main__":
     )
 
     sm.get_canvas_objects()
-    if stylize_status:
-        file_id = sm.upload_quiz_file(stylize_kwargs["local_output_path"])
-    else:
-        raise Exception("Stylize error.")
+    assert result.status == SUCCESS
+    file_id = sm.upload_quiz_file(stylize_kwargs["local_output_path"])
 
     sm.atomic_quiz_submit(partial(answers_fn, file_id=file_id), verbose=True)
-    sm.assignment_submit(verbose=True)
-
-    # Cleanup
-    for p in Path("temp").iterdir():
-        p.unlink()
-    Path("temp").rmdir()
+    sm.assignment_submit(verbose=True, late_days=1)
