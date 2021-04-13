@@ -14,6 +14,7 @@
 - [External Tasks](#external-tasks)
 - [Luigi Downloads](#luigi-downloads)
 - [Stylizing - Microsciences Approach](#stylizing---microsciences-approach)
+- [Updown](#updown)
 - [Submit](#submit)
 - [Testing](#testing)
 
@@ -50,6 +51,13 @@ A couple of cool features of this set up:
    * Using the Docker feature of treating additional arguments passed to the run command beyond those specified in the entry point is an easy way to be able to pass additional arguments to the stylize module inside the container.
    * Packaging the models inside the Docker container as the image is being built, completely encapsulates them. Having the models be in the MLflow format in addition to being inside a Docker container is probably overkill, but was useful to gain experience with both approaches.
    * The Stylize task calls for the image to be built every time it is run, to make sure that it exits before calling it to stylize an image, but if it exists, Docker won't rebuild it again.
+
+## Updown
+The ability to force a download of the original image file even if it already exists was implemented first
+in csci_utils by including a `ForceableTask` that other tasks inherit from. It has an optional parameter,
+`force` that if set to True will remove any of the outputs upon init so that when Luigi checks to see if
+its requirements have been satisfied, it will find that they are not and run the task. This functionality is
+include in Pset 4 in the main Stylize task, which also takes the optional `force` parameter, which in turn gets passed through to the `S3DownloadTask`.
 
 ## Submit
 Submitting the quiz required uploading a file. The canvasapi uploader class was broken. I added a [file upload method](https://github.com/csci-e-29/2021sp-csci-utils-CalebEverett/blob/ca4cd04ec0f7bc73735c89618c0932da2dbe640b/src/csci_utils/canvas_utils/__init__.py#L281) to my SubmissionManager class in csci_utils using [requests](https://docs.python-requests.org/en/master/) to access the [Canvas REST API](https://canvas.instructure.com/doc/api/) directly.

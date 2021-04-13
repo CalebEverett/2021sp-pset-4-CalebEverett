@@ -3,7 +3,7 @@ import os
 
 import docker
 from csci_utils.luigi import S3DownloadTask, SuffixPreservingLocalTarget
-from luigi import FloatParameter, Parameter, Task, format
+from luigi import BoolParameter, FloatParameter, Parameter, Task, format
 
 logger = logging.getLogger("luigi-interface")
 
@@ -37,12 +37,20 @@ class Stylize(Task):
         ),
         default=os.getcwd(),
     )
+    force = BoolParameter(
+        description=(
+            "Set to True to force download of file from S3 even"
+            "if it already exists locally"
+        ),
+        default=False,
+    )
 
     def requires(self):
         return S3DownloadTask(
             bucket=self.bucket,
             s3_path=self.s3_image_path,
             local_path=self.local_image_path,
+            force=self.force,
         )
 
     def run(self):
