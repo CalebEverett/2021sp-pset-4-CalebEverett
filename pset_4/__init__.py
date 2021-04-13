@@ -1,4 +1,5 @@
 import logging
+import os
 
 import docker
 from csci_utils.luigi import S3DownloadTask, SuffixPreservingLocalTarget
@@ -30,10 +31,11 @@ class Stylize(Task):
         default="new-style", description="Tag to apply to Docker image."
     )
     bind_mount = Parameter(
-        default=(
+        description=(
             "Local path to mount Docker container to so it can access local images"
             " and write the stylized image."
-        )
+        ),
+        default=os.getcwd(),
     )
 
     def requires(self):

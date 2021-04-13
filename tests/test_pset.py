@@ -39,7 +39,6 @@ class StylizeTests(TestCase):
         # Check to make sure neuralstyle produced the correct output
         with open(self.stylize_args["local_output_path"], "rb") as f:
             hash = hashlib.md5(f.read()).hexdigest()
-            print(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
             self.assertEqual(hash, "bba7bfe92f1c89d1ef6b28aaf97b6b2b")
 
         # Cleanup
