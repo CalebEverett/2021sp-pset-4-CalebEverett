@@ -21,15 +21,15 @@
 
 ## Overview
 
-This assignment was about about developing robust deta processing pipelines with [Luigi](https://luigi.readthedocs.io/en/stable/) and machine learning operations. The end product is a pipeline that downloads an image from [S3](https://docs.aws.amazon.com/s3/index.html) and conducts neural style transfer on it using [pre-trained deep learning models](https://github.com/abhiskk/fast-neural-style).
+This assignment was about about developing robust data processing pipelines with [Luigi](https://luigi.readthedocs.io/en/stable/) and machine learning operations. The end product is a pipeline that downloads an image from [S3](https://docs.aws.amazon.com/s3/index.html) and conducts neural style transfer on it using [pre-trained deep learning models](https://github.com/abhiskk/fast-neural-style).
 
 
 <p align="center">
-  <img src="pset_4/images/luigi.jpg" align="left"><img width=300 src="pset_4/images/cat.jpg" align="left">
+  <img src="pset_4/images/luigi.jpg" align="left"><img width=300 src="pset_4/images/cat.jpg">
 </p>
 
 <p align="center">
-  <img src="pset_4/images/luigi_mosaic.jpg"><img width=300 src="pset_4/images/cat_mosaic.jpg">
+  <img src="pset_4/images/luigi_mosaic.jpg" align="left"><img width=300 src="pset_4/images/cat_mosaic.jpg">
 </p>
 
 ## New Atomic Write
