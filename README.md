@@ -1,11 +1,5 @@
 # Pset 4
 
-[![build status](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/actions/workflows/build.yml/badge.svg)](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/actions/workflows/build.yml)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/845d0566795e550b2bec/maintainability)](https://codeclimate.com/repos/607069f150062b51d3001736/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/845d0566795e550b2bec/test_coverage)](https://codeclimate.com/repos/607069f150062b51d3001736/test_coverage)
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -19,6 +13,7 @@
 - [Testing](#testing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+**Apologies for the links to the private classroom repo.*
 
 ## Overview
 
@@ -41,10 +36,10 @@ We were also required to develop Luigi tasks to download an image and model from
 
 ## Stylizing - Microsciences Approach
 My solution to the stylizing inclues the following functionality:
-1. Pytorch models are packaged as [MLflow](https://www.mlflow.org/docs/latest/index.html) models using [package_models.py](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/master/pset_4/package_models/package_models.py). This downloads the required pre-trained models, loads them as Pytorch models and then saves them as MLflow models.
-2. Use [stylize.py](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/master/pset_4/stylize.py) to call the MLflow models for predictions, pre and post-processing.
-3. Create [Dockerfile](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/master/pset_4/Dockerfile) to create an image with packaged models `stylize.py` module in it.
-4. Create a [Stylize](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/master/pset_4/__init__.py) Luigi Task that builds the image and runs it using the [Docker SDK](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/master/pset_4/__init__.py), accepting command line arguments, to stylize an image, downloading it from S3 if it exists there but isn't present locally.
+1. Pytorch models are packaged as [MLflow](https://www.mlflow.org/docs/latest/index.html) models using [package_models.py](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/master/pset_4/package_models/package_models.py). This downloads the required pre-trained models, loads them as Pytorch models and then saves them as MLflow models.
+2. Use [stylize.py](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/master/pset_4/stylize.py) to call the MLflow models for predictions, pre and post-processing.
+3. Create [Dockerfile](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/master/pset_4/Dockerfile) to create an image with packaged models `stylize.py` module in it.
+4. Create a [Stylize](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/master/pset_4/__init__.py) Luigi Task that builds the image and runs it using the [Docker SDK](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/master/pset_4/__init__.py), accepting command line arguments, to stylize an image, downloading it from S3 if it exists there but isn't present locally.
 
 A couple of cool features of this set up:
    * Using the Docker SDK to call docker from within the Luigi task avoids having to use an external task.
@@ -66,5 +61,5 @@ Submitting the quiz required uploading a file. The canvasapi uploader class was 
 All of the above functionality is fully tested, including the model packaging code.
 * The [file upload method test](https://github.com/csci-e-29/2021sp-csci-utils-CalebEverett/blob/ca4cd04ec0f7bc73735c89618c0932da2dbe640b/src/csci_utils/canvas_utils/tests.py#L264) mocks the Canvas Api for the required multi-step post process.
 * The tests for the [S3 Luigi tasks](https://github.com/csci-e-29/2021sp-csci-utils-CalebEverett/blob/ca4cd04ec0f7bc73735c89618c0932da2dbe640b/src/csci_utils/luigi/tests.py#L67) mock the S3 api
-* While most of the functionality called in the Stylize task consists of composed functions tested elsewhere, [the test](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/e1ee5859eee7e96242662d28001165dd3e63ea76/tests/test_pset.py#L19) is a full cycle from downloading an image all the way through to stylizing. The final test takes a hash of the stylized image and asserts it is equal to a known hash value.
-* Includes [testing of model packaging and stylizing code](https://github.com/csci-e-29/2021sp-pset-4-CalebEverett/blob/e1ee5859eee7e96242662d28001165dd3e63ea76/tests/test_pset.py#L53) in similar manner with the final test being of a hash of the stylized image.
+* While most of the functionality called in the Stylize task consists of composed functions tested elsewhere, [the test](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/e1ee5859eee7e96242662d28001165dd3e63ea76/tests/test_pset.py#L19) is a full cycle from downloading an image all the way through to stylizing. The final test takes a hash of the stylized image and asserts it is equal to a known hash value.
+* Includes [testing of model packaging and stylizing code](https://github.com/CalebEverett/2021sp-pset-4-CalebEverett/blob/e1ee5859eee7e96242662d28001165dd3e63ea76/tests/test_pset.py#L53) in similar manner with the final test being of a hash of the stylized image.

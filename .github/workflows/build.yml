@@ -5,7 +5,7 @@ name: build status
 
 on:
   push:
-    branches: [ master, dev, debug/gha_tests ]
+    branches: [ dev, debug/gha_tests ]
 
 env:
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -43,7 +43,7 @@ jobs:
       run: |
         ./cc-test-reporter after-build --exit-code 0
     - name: Submit to Canvas
-      if: true
+      if: false
       run: |
         pipenv run python submit.py
   #
